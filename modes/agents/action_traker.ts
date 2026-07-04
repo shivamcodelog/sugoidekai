@@ -47,7 +47,7 @@ updateStatus(
     if(!a) return
 
     a.status= status;
-    if(userApproved !==undefined) a.userApproved=userApproved
+    if(userApproved !==undefined) a.userApproved=userApproved 
 
 
 
