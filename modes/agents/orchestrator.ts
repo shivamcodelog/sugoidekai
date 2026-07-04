@@ -3,6 +3,7 @@ import {select, isCancel ,text} from "@clack/prompts"
 import { defaultAgentConfig } from "./types.ts";
 import { ActionTracker } from "./action_traker.ts";
 import { ToolExecuter } from "./ToolExcuter.ts";
+import { createAgentTools } from "./agentTools.ts";
 
 export async function runAgentMode() {
 
@@ -19,5 +20,6 @@ export async function runAgentMode() {
     const config = defaultAgentConfig()
     const tracker = new ActionTracker()
     const executer = new ToolExecuter(tracker,config)
+    const tool =createAgentTools(executer)
     
 }
