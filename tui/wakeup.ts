@@ -1,6 +1,9 @@
 import {select, isCancel} from "@clack/prompts"
 import chalk from "chalk"
 import figlet from "figlet"
+import { runCli } from "../modes/cli"
+import fontData from "figlet/fonts/1Row"
+import { assert } from "node:console"
 
 const BANNER_FONT = 'ANSI Shadow'
 
@@ -23,34 +26,36 @@ function printBannerWithShadow(ascii:string){
 }
 
 
-export async function runWakeup(){
-    let ascii:string;
-    try{
-        ascii = figlet.textSync("dekaioppai" , {font:BANNER_FONT})
 
+export async function runWakeup(){
+    let ascii:string
+
+    try{
+        ascii=figlet.textSync("dekaiOppai",{font:BANNER_FONT})
     }catch(error){
-        ascii = figlet.textSync("dekaioppai" , {font:"Standard"})
+        ascii=figlet.textSync("dekaiOppai", {font:"Standard"})
     }
 
     printBannerWithShadow(ascii)
 
-    const mode=await select({
-        message:"Which mode you want to proceed with? ",
+    const mode = await select({
+        message:"Which mode u want to proceed with?",
         options:[
-            {value:"cli", label:"CLI"},
-            {value:"telegram" ,label:"Telegram"}
-        ]
-    });
+            {value:"cli" ,label:"CLI"},
+            {value:"telegram" , label:"Telegram"},
+            {value:"exit" , label:"Exit"},
 
-    if(isCancel(mode)){
-        process.exit(0)
+        ]
+
+    })
+
+    if(isCancel(mode) || mode==="exit"){
+        console.log(chalk.dim("exiting the program.."));
     }
 
-    if(mode === "cli"){
-        console.log(chalk.dim("executing cli mode..."));
-    
-    }else{
-        console.log(chalk.dim("executing telegram mode"));
+    if(mode==="cli"){
+       await  runCli()
+    }else if(mode==="telegram"){
+        console.log(chalk.dim("Starting the telegram"));
     }
 }
-
