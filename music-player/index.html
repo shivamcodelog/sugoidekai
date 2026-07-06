@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Spotify Player</title>
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body class="bg-gradient-to-br from-[#121212] to-[#181818] min-h-screen flex items-center justify-center overflow-hidden">
+  <div class="player relative w-full max-w-xs bg-[rgba(18,18,18,0.9)] backdrop-blur-sm rounded-[16px] p-5 shadow-[0_8px_32px_rgba(0,0,0,0.3)] overflow-hidden border border-[rgba(255,255,255,0.05)]">
+    <div class="cover h-56 rounded-[16px] rounded-b-none overflow-hidden mb-4 shadow-lg border border-[rgba(255,255,255,0.1)]">
+      <img id="cover-img" src="" alt="Cover" class="w-full h-full object-cover transition-transform duration-500 ease-out" />
+    </div>
+    <div class="info text-center">
+      <h2 id="title" class="text-lg font-semibold text-white mb-1">Title</h2>
+      <p id="artist" class="text-primary text-sm font-medium">Artist</p>
+    </div>
+    <audio id="audio" src=""></audio>
+    <div class="controls flex justify-center items-center gap-3 my-4">
+      <button id="prev" class="control-btn text-lg bg-primary text-white w-12 h-12 rounded-full flex items-center justify-center transition-transform duration-200 ease-out shadow-[0_4px_12px_rgba(29,185,84,0.3)]">⏮️</button>
+      <button id="play" class="control-btn text-lg bg-primary text-white w-12 h-12 rounded-full flex items-center justify-center transition-transform duration-200 ease-out shadow-[0_4px_12px_rgba(29,185,84,0.3)]">▶️</button>
+      <button id="next" class="control-btn text-lg bg-primary text-white w-12 h-12 rounded-full flex items-center justify-center transition-transform duration-200 ease-out shadow-[0_4px_12px_rgba(29,185,84,0.3)]">⏭️</button>
+    </div>
+    <input type="range" id="progress" min="0" max="100" value="0" class="w-full h-1.5 rounded bg-[rgba(255,255,255,0.1)]" />
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

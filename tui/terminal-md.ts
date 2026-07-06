@@ -8,11 +8,11 @@ function ensureMarked():void {
 
     const w= Math.max(40 ,Math.min(process.stdout.columns || 80,120));
 
-    marked.use(markedTerminal({with:w , reflowText:true}, {}));
-    ready:true
+    marked.use(markedTerminal({ width: w, reflowText: true }, {}) as any);
+    ready = true;
 }
 
 export function renderTerminalMarkdown(source:string):string{
     ensureMarked();
-    return marked.parse(source.trimEnd() , {async:false})
+    return (marked.parse(source.trimEnd(), { async: false }) as string);
 }

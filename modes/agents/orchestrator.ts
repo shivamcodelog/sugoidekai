@@ -3,7 +3,7 @@ import { select, isCancel, text } from "@clack/prompts"
 import { defaultAgentConfig } from "./types.ts";
 import { ActionTracker } from "./action_traker.ts";
 import { ToolExecuter } from "./ToolExcuter.ts";
-import { createAgentTools } from "./agentTools.ts";
+import { createAgentTools } from "./AgentTools.ts";
 import { getAgentModel } from "../../ai/ai.config.ts";
 import { stepCountIs, ToolLoopAgent } from "ai";
 import { json } from "node:stream/consumers";
