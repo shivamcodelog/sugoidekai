@@ -11,6 +11,8 @@ import { renderTerminalMarkdown } from "../../tui/terminal-md.ts";
 import { runApprovalFlow } from "../agents/Approval.ts";
 import { file } from "bun";
 import { trace } from "node:console";
+import { exec } from "node:child_process";
+import { createWebTools } from "../plan/web-tools.ts";
 
 
 function createAskTools(executor:ToolExecuter){
@@ -101,10 +103,15 @@ export async function runAskMode() {
     const tracker = new ActionTracker();
     const executor = new ToolExecuter(tracker,config)
 
+    const tools = {
+        ...createAskTools(executor),
+        ...createWebTools(tracker)
+    }
+
     const agent = new ToolLoopAgent({
         model:getAgentModel(),
         stopWhen:stepCountIs(20),
-        tools:tool
+        tools
     }
     )
 

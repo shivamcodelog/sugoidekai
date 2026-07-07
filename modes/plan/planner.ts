@@ -16,6 +16,7 @@ import { ToolExecuter } from "../agents/ToolExcuter.ts";
 import { defaultAgentConfig } from "../agents/types.ts";
 import type { PlanStep } from "./types.ts";
 import { describe } from "zod/v4/core";
+import { createWebTools } from "./web-tools.ts";
 
 const planSchema = z.object({
     researchSummary:z.string().optional(),
@@ -113,14 +114,18 @@ const PLAN_INSTRUCTIONS = (codebase: string, hasWeb: boolean) =>
     const trackor = new ActionTracker();
     const executor = new ToolExecuter(trackor , config)
 
-    const hasWeb =false
+    const hasWeb =!!process.env.FIRECRAWL_API_KEY
 
     const model = wrapLanguageModel({
         model:getAgentModel(),
         middleware:extractJsonMiddleware()
     })
     
-    const tools = {...readOnlyTools(executor)}
+    const tools = {
+        ...readOnlyTools(executor),
+        ...(hasWeb ? createWebTools(trackor) : {})
+    }
+
 
     console.log(chalk.cyan("\n Researching & drafting a plan...\n"));
 
