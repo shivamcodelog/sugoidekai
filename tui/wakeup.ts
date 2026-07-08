@@ -4,6 +4,7 @@ import figlet from "figlet"
 import { runCli } from "../modes/cli"
 import fontData from "figlet/fonts/1Row"
 import { assert } from "node:console"
+import { runTelegramMode } from "../modes/telegram"
 
 const BANNER_FONT = 'ANSI Shadow'
 
@@ -56,6 +57,6 @@ export async function runWakeup(){
     if(mode==="cli"){
        await  runCli()
     }else if(mode==="telegram"){
-        console.log(chalk.dim("Starting the telegram"));
+        await runTelegramMode();
     }
 }

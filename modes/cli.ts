@@ -26,7 +26,7 @@ export async function runCli() {
             await runAskMode()
         }
         if(mode==="plan"){
-            await runPlanMode()
+            await  runPlanMode()
         }
 
         if(mode!=='agent' && mode!=="plan" && mode!=='ask'){
