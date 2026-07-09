@@ -1,4 +1,4 @@
-#!/usr/bin/env bun
+st#!/usr/bin/env bun
 
 // Patch DOMException.prototype.message to be writable in Bun environment
 // to prevent Telegraf client from throwing TypeError when redacting tokens.
