@@ -29,6 +29,9 @@ export const BANNER_THEMES = {
 } as const;
 
 export function printBannerWithShadow(ascii: string, faceColor: string, shadowColor: string) {
+
+    console.log('\n');
+
     const bannerLines = ascii.replace(/\s+$/, "").split("\n");
     const maxLen = Math.max(...bannerLines.map((l) => l.length), 0);
     const rowwidth = maxLen + 2;
