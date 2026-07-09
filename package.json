@@ -1,10 +1,17 @@
 {
   "name": "sugoidekai",
+  "description": "A Bun-powered TypeScript CLI with CLI, Telegram, plan, ask, agent, and Reddit OSINT modes.",
   "module": "index.ts",
   "type": "module",
   "private": true,
   "bin": {
     "sugoidekai": "./index.ts"
+  },
+  "scripts": {
+    "start": "bun index.ts oppai",
+    "dev": "bun index.ts oppai",
+    "cli": "bun index.ts oppai",
+    "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
     "@types/bun": "latest",
