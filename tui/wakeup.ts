@@ -6,7 +6,7 @@ import { runRedditMode } from "../modes/reddit";
 import { printLargeBanner } from "./banner";
 
 export async function runWakeup() {
-    printLargeBanner("dekaisugoi");
+    printLargeBanner("dekai sugoi");
 
     while (true) {
         const mode = await select({

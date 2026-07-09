@@ -1,10 +1,10 @@
 {
-  "name": "dekaisugoi",
+  "name": "sugoidekai",
   "module": "index.ts",
   "type": "module",
   "private": true,
   "bin": {
-    "dekaisugoi": "./index.ts"
+    "sugoidekai": "./index.ts"
   },
   "devDependencies": {
     "@types/bun": "latest",

@@ -29,7 +29,7 @@ import { runWakeup } from "./tui/wakeup";
 const program = new Command()
 
 program
-   .name("dekaisugoi")
+   .name("sugoidekai")
    .description("nice baddy chisa  ")
    .version("0.0.1");
 
