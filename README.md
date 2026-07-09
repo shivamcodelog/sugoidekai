@@ -80,6 +80,13 @@ Or run the CLI entry directly:
 bun index.ts oppai
 ```
 
+Or we can it directly like sugoidekai oppai
+
+```bash
+bun link 
+```
+run above code in terminal and it will give u the further steps
+
 The launcher then shows the mode picker from [tui/wakeup.ts](tui/wakeup.ts) and routes into:
 
 - [modes/cli.ts](modes/cli.ts)
@@ -109,6 +116,3 @@ The launcher then shows the mode picker from [tui/wakeup.ts](tui/wakeup.ts) and 
 - [tui/](tui) contains terminal UI helpers.
 - [images/](images) stores screenshots used by the project.
 
-## Notes
-
-The repo is intentionally kept lightweight. Generated reports such as `redditReport3.md`, local `.env` files, and build artifacts are ignored so the repository stays clean when you push it.
