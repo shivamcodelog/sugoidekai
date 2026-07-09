@@ -2,6 +2,29 @@
 
 SUGOIDEKAI is a Bun-powered TypeScript CLI that launches a small multi-mode agent workspace. From one terminal entry point, you can open the interactive CLI, run planning and ask flows, connect a Telegram bot, or use the Reddit OSINT mode for username investigations.
 
+## Preview
+
+![Main mode selector](images/menu.png)
+
+The start screen lets you choose between the CLI, Telegram, and Reddit OSINT modes from one place.
+
+### CLI mode
+
+![CLI mode](images/cli.png)
+![CLI mode 2](images/dekaicli.png)
+![CLI mode 3](images/dekaicli2.png)
+
+### Reddit OSINT mode
+
+![Reddit OSINT](images/red.png)
+![Reddit OSINT 2](images/red2.png)
+
+### Telegram mode
+
+![Telegram mode](images/tele.png)
+
+
+
 ## What it does
 
 The project currently exposes these paths:
