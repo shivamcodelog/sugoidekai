@@ -21,6 +21,10 @@ export const BANNER_THEMES = {
     telegram: {
         face: "#00f5d4",     
         shadow: "#1d3557",   
+    },
+    reddit: {
+        face: "#ff4500", // Reddit Orange-Red
+        shadow: "#5f1f00",
     }
 } as const;
 
@@ -42,7 +46,7 @@ export function printBannerWithShadow(ascii: string, faceColor: string, shadowCo
     console.log();
 }
 
-export function printLargeBanner(text: string, themeName: "default" | "cli" | "telegram" = "default") {
+export function printLargeBanner(text: string, themeName: "default" | "cli" | "telegram" | "reddit" = "default") {
     const theme = BANNER_THEMES[themeName] || BANNER_THEMES.default;
     let ascii: string;
     try {

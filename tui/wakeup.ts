@@ -2,6 +2,7 @@ import { select, isCancel } from "@clack/prompts";
 import chalk from "chalk";
 import { runCli } from "../modes/cli";
 import { runTelegramMode } from "../modes/telegram";
+import { runRedditMode } from "../modes/reddit";
 import { printLargeBanner } from "./banner";
 
 export async function runWakeup() {
@@ -13,6 +14,7 @@ export async function runWakeup() {
             options: [
                 { value: "cli", label: "CLI" },
                 { value: "telegram", label: "Telegram" },
+                { value: "reddit", label: "Reddit OSINT" },
                 { value: "exit", label: "Exit" },
             ]
         });
@@ -26,6 +28,8 @@ export async function runWakeup() {
             await runCli();
         } else if (mode === "telegram") {
             await runTelegramMode();
+        } else if (mode === "reddit") {
+            await runRedditMode();
         }
     }
 }
