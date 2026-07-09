@@ -88,9 +88,9 @@ function asMd(question :string ,answer:string):string {
 }
 
 export async function runAskMode() {
-    console.log(chalk.bold("\n ❓Ask mode\n"));
+    console.log(chalk.bold("\nAsk mode\n"));
 
-    const question =await text ({message:"what do you want to ask??"})
+    const question =await text ({message:"ask me anything anata??"})
 
     if(isCancel(question) || !question.trim()) return ;
 

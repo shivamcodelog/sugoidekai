@@ -25,7 +25,7 @@ function stepPrompt(goal: string, step: PlanStep): string {
 export async function runPlanMode():Promise<void>{
     console.log(chalk.bold('\n Plan Mode\n'));
 
-    const goal = await text({message:"What is your goal?"})
+    const goal = await text({message:"What's your goal??"})
 
     if(isCancel(goal) || !goal.trim()) return 
 

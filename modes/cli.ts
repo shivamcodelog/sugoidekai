@@ -3,9 +3,11 @@ import chalk from "chalk"
 import { runAgentMode } from "./agents/orchestrator";
 import { runAskMode } from "./ask/orchestrator";
 import { runPlanMode } from "./plan/orchestrator";
+import { printLargeBanner } from "../tui/banner.ts";
 
 
 export async function runCli() {
+    printLargeBanner("CLI Mode", "cli");
     while(true){
         const mode =await select({
             message:"select ur CLI sub-mode",

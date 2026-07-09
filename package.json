@@ -1,10 +1,10 @@
 {
-  "name": "dekaioppai",
+  "name": "dekaisugoi",
   "module": "index.ts",
   "type": "module",
   "private": true,
   "bin": {
-    "dekaioppai": "./index.ts"
+    "dekaisugoi": "./index.ts"
   },
   "devDependencies": {
     "@types/bun": "latest",
