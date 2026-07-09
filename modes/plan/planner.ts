@@ -17,6 +17,7 @@ import { defaultAgentConfig } from "../agents/types.ts";
 import type { PlanStep } from "./types.ts";
 import { describe } from "zod/v4/core";
 import { createWebTools } from "./web-tools.ts";
+import { createSpinner } from "../../tui/spinner.ts";
 
 const planSchema = z.object({
     researchSummary:z.string().optional(),
@@ -127,7 +128,8 @@ const PLAN_INSTRUCTIONS = (codebase: string, hasWeb: boolean) =>
     }
 
 
-    console.log(chalk.cyan("\n Researching & drafting a plan...\n"));
+    const s = createSpinner();
+    s.start(chalk.cyan("Researching & drafting a plan..."));
 
     const result = await generateText({
         model,
@@ -136,9 +138,9 @@ const PLAN_INSTRUCTIONS = (codebase: string, hasWeb: boolean) =>
         system:PLAN_INSTRUCTIONS(config.codebasePath ,false) ,
         prompt:`User goal: \n${goal}`,
         output:Output.object({schema:planSchema})
-
-
     });
+
+    s.stop(chalk.green("Drafted plan successfully!"));
 
     const validated = planSchema.parse(result.output);
 

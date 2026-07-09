@@ -1,5 +1,6 @@
 import chalk from "chalk";
 import {confirm, isCancel ,text} from "@clack/prompts"
+import { createSpinner } from "../../tui/spinner.ts";
 import { ToolLoopAgent ,stepCountIs,tool } from "ai";
 import { z } from "zod";
 import { getAgentModel } from "../../ai/ai.config.ts";
@@ -115,8 +116,28 @@ export async function runAskMode() {
     }
     )
 
-    const result = await agent.generate({ prompt :question.trim()});
-    const answer =result.text?.trim() || "(no answer)"
+    const s = createSpinner();
+    s.start("Processing your question...");
+
+    const result = await agent.generate({
+        prompt: question.trim(),
+        onStepFinish: ({ toolCalls }) => {
+            s.clear();
+            for (const tc of toolCalls) {
+                const preview = JSON.stringify(tc.input).slice(0, 160);
+                console.log(
+                    chalk.green('  ✓'),
+                    chalk.bold(String(tc.toolName)),
+                    chalk.dim(preview + (preview.length >= 160 ? "..." : ""))
+                );
+            }
+            s.start("Processing your question...");
+        }
+    });
+
+    s.stop("Answer ready!");
+
+    const answer = result.text?.trim() || "(no answer)"
 
     console.log("\n" + renderTerminalMarkdown(answer) +"\n");
 

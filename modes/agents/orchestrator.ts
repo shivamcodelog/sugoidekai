@@ -1,5 +1,6 @@
 import chalk from "chalk";
 import { select, isCancel, text } from "@clack/prompts"
+import { createSpinner } from "../../tui/spinner.ts";
 import { defaultAgentConfig } from "./types.ts";
 import { ActionTracker } from "./action_traker.ts";
 import { ToolExecuter } from "./ToolExcuter.ts";
@@ -39,9 +40,13 @@ export async function runAgentMode() {
     })
 
 
+    const s = createSpinner();
+    s.start("Agent starting...");
+
     const result = await agent.generate({
         prompt: goal.trim(),
         onStepFinish: ({ toolCalls }) => {
+            s.clear();
             for (const tc of toolCalls) {
                 const preview = JSON.stringify(tc.input).slice(0, 160);
 
@@ -51,8 +56,11 @@ export async function runAgentMode() {
                     chalk.dim(preview + (preview.length >= 160 ? "..." : ""))
                 );
             }
+            s.start("Agent thinking...");
         }
-    })
+    });
+
+    s.stop("Agent execution complete.");
 
 
     if(result.text.trim()) console.log(renderTerminalMarkdown( result.text));

@@ -1,5 +1,6 @@
 import chalk from "chalk";
 import { confirm, isCancel, text } from "@clack/prompts";
+import { createSpinner } from "../../tui/spinner.ts";
 import { ToolLoopAgent, stepCountIs } from "ai";
 import { getAgentModel } from "../../ai/ai.config.ts";
 import { ActionTracker } from "../agents/action_traker.ts";
@@ -13,6 +14,7 @@ import { runApprovalFlow } from "../agents/Approval.ts";
 import { renderTerminalMarkdown } from "../../tui/terminal-md.ts";
 import { generatePlan } from "./planner.ts";
 import { printPlan, selectSteps } from "./selection.ts";
+
 import type { PlanStep } from "./types.ts";
 import { createWebTools } from "./web-tools.ts";
 
@@ -49,6 +51,7 @@ export async function runPlanMode():Promise<void>{
         ...createWebTools(tracker)
     }
 
+    const s = createSpinner();
     for (const step of selected) {
         console.log(chalk.bold(`\n ${step.title} \n`));
 
@@ -56,11 +59,25 @@ export async function runPlanMode():Promise<void>{
             model:getAgentModel(),
             stopWhen:stepCountIs(30),
             tools
-
         });
 
-        const r = await agent.generate({prompt:stepPrompt(plan.goal ,step)})
-
+        s.start(`Executing step...`);
+        const r = await agent.generate({
+            prompt:stepPrompt(plan.goal ,step),
+            onStepFinish: ({ toolCalls }) => {
+                s.clear();
+                for (const tc of toolCalls) {
+                    const preview = JSON.stringify(tc.input).slice(0, 160);
+                    console.log(
+                        chalk.green('  ✓'),
+                        chalk.bold(String(tc.toolName)),
+                        chalk.dim(preview + (preview.length >= 160 ? "..." : ""))
+                    );
+                }
+                s.start(`Executing step...`);
+            }
+        });
+        s.stop(`Step completed`);
 
         if(r.text) return console.log(renderTerminalMarkdown(r.text));
     }
